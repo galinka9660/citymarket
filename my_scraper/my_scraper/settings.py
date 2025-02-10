@@ -62,8 +62,9 @@ ROBOTSTXT_OBEY = False # against 403 Error, per default it was on true
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "my_scraper.pipelines.MyScraperPipeline": 300,
+# ITEM_PIPELINES = {
+    #"my_scraper.pipelines.SavingToPostgresPipeline":200,
+    #"my_scraper.pipelines.MyScraperPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -1,11 +1,13 @@
 import scrapy
+from my_scraper.app import add_product
+
 
 class MySpiderSpider(scrapy.Spider):
     name = "my_spider"
     allowed_domains = ["www.stephanis.com.cy"]
     start_urls = ["https://www.stephanis.com.cy/en/products/387164"]
 
-    # imitates a browser because a website blocks a bot Scrappy (403 Error)
+    # imitates a browser because a website blocks a bot Scrapy (403 Error)
     def start_requests(self):
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -38,8 +40,12 @@ class MySpiderSpider(scrapy.Spider):
             if location and status_text and "out of stock" not in status_text.lower():
                 available_stores.append({"location": location.strip(), "status": status_text.strip()})
 
+        print(f"our title is: {title}")
+        add_product(title)
+
+
         # what we write down in json file
-        yield {"title": title, "price": price, "description": description, "availability": available_stores}
+        return {"title": title, "price": price, "description": description, "availability": available_stores}
         
         
 
